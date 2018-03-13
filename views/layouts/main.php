@@ -12,9 +12,13 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\AppAssetIE;
 
+// подключаем наши css и js
 AppAsset::register($this);
+// подключаем css и js которые должны быть только при определённых условиях
 AppAssetIE::register($this);
 ?>
+
+<!--помечаем начало нашей страницы-->
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
     <html lang="<?= Yii::$app->language ?>">
@@ -26,11 +30,11 @@ AppAssetIE::register($this);
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
 
-        <link rel="shortcut icon" href="images/ico/favicon.ico">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="/images/ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
     </head><!--/head-->
 
     <body>
@@ -67,7 +71,7 @@ AppAssetIE::register($this);
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="index.html"><img src="images/home/logo.png" alt=""/></a>
+                            <a href="index.html"><img src="/images/home/logo.png" alt=""/></a>
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">
@@ -173,7 +177,7 @@ AppAssetIE::register($this);
                             <div class="video-gallery text-center">
                                 <a href="#">
                                     <div class="iframe-img">
-                                        <img src="images/home/iframe1.png" alt=""/>
+                                        <img src="/images/home/iframe1.png" alt=""/>
                                     </div>
                                     <div class="overlay-icon">
                                         <i class="fa fa-play-circle-o"></i>
@@ -188,7 +192,7 @@ AppAssetIE::register($this);
                             <div class="video-gallery text-center">
                                 <a href="#">
                                     <div class="iframe-img">
-                                        <img src="images/home/iframe2.png" alt=""/>
+                                        <img src="/images/home/iframe2.png" alt=""/>
                                     </div>
                                     <div class="overlay-icon">
                                         <i class="fa fa-play-circle-o"></i>
@@ -203,7 +207,7 @@ AppAssetIE::register($this);
                             <div class="video-gallery text-center">
                                 <a href="#">
                                     <div class="iframe-img">
-                                        <img src="images/home/iframe3.png" alt=""/>
+                                        <img src="/images/home/iframe3.png" alt=""/>
                                     </div>
                                     <div class="overlay-icon">
                                         <i class="fa fa-play-circle-o"></i>
@@ -218,7 +222,7 @@ AppAssetIE::register($this);
                             <div class="video-gallery text-center">
                                 <a href="#">
                                     <div class="iframe-img">
-                                        <img src="images/home/iframe4.png" alt=""/>
+                                        <img src="/images/home/iframe4.png" alt=""/>
                                     </div>
                                     <div class="overlay-icon">
                                         <i class="fa fa-play-circle-o"></i>
@@ -231,7 +235,7 @@ AppAssetIE::register($this);
                     </div>
                     <div class="col-sm-3">
                         <div class="address">
-                            <img src="images/home/map.png" alt=""/>
+                            <img src="/images/home/map.png" alt=""/>
                             <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
                         </div>
                     </div>
@@ -309,7 +313,7 @@ AppAssetIE::register($this);
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
-                    <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+                    <p class="pull-left">Copyright © 2018 E-SHOPPER Inc. All rights reserved.</p>
                     <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span>
                     </p>
                 </div>
