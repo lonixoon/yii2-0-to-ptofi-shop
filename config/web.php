@@ -47,14 +47,22 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            // конкертные правила должны стоять ВСЕГДА выше общих!
             'rules' => [
+                // ЧПУ для пагинации в меню категорий
+                'category/<id:\d+>/page/<page:\d+>' => 'category/view',
+                // пишем правила для красивой ссылки в меню категорий
+                'category/<id:\d+>' => 'category/view',
             ],
         ],
     ],
     'params' => $params,
 
     // мои параметры
+    // выставляем русский язык для уведомлений
     'language' => 'ru-RU',
+    // устанавливаем контроллер по умолчанию
+    'defaultRoute' => 'category/index'
 ];
 
 if (YII_ENV_DEV) {

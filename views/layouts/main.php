@@ -11,6 +11,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\AppAssetIE;
+use yii\helpers\Url;
 
 // подключаем наши css и js
 AppAsset::register($this);
@@ -71,7 +72,7 @@ AppAssetIE::register($this);
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="index.html"><img src="/images/home/logo.png" alt=""/></a>
+                            <a href="<?= Url::home() ?>"><?= Html::img('@web/images/home/logo.png', ['alt' => 'e-shopper']) ?></a>
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">
