@@ -11,6 +11,7 @@ use app\models\Product;
 use app\models\Category;
 use Yii;
 use yii\data\Pagination;
+use yii\web\HttpException;
 
 class CategoryController extends AppController
 {
@@ -26,12 +27,19 @@ class CategoryController extends AppController
 
     public function actionView($id)
     {
-        // получаем id из запрашиваемой ссылки
-        $id = Yii::$app->request->get('id');
-        // получамаем все где поле category_id равно переданому $id
-//        $products = Product::find()->where(['category_id' => $id])->all();
+        // получаем id из запрашиваемой ссылки (как вариант)
+//        $id = Yii::$app->request->get('id');
+
+        // получаем категорию
+        $category = Category::findOne($id);
+
+        // если категории не существует выкидываем ошибку
+        if (empty($category))
+            throw new HttpException(404, 'Такой категории нет');
+
         // получамаем все где поле category_id равно переданому $id
         $query = Product::find()->where(['category_id' => $id]);
+
         // считаем длину массива
         $count = $query->count();
         // получаем данные для пагинатора и выставляем параметры для ЧПУ (последние два)
@@ -41,13 +49,39 @@ class CategoryController extends AppController
             'forcePageParam' => false,
             'pageSizeParam' => false,
         ]);
+
         // выгружаем продукты с учётом параметров пагинатора
         $products = $query->offset($pagination->offset)->limit($pagination->limit)->all();
 
-        // получаем категорию
-        $category = Category::findOne($id);
         // выводим на страницы категорий теги и заголоки
         $this->setMeta('E-SHOPPER | ' . $category->name, $category->keywords, $category->description);
         return $this->render('view', compact('products', 'pagination', 'category'));
+    }
+
+    public function actionSearch()
+    {
+        $search = trim(Yii::$app->request->get('search'));
+        // выводим мета теги
+        $this->setMeta('E-SHOPPER | Поиск: ' . $search);
+        if (!$search)
+            return $this->render('search');
+        // получамаем все где поле name совпадает с $search
+        $query = Product::find()->where(['like', 'name', $search]);
+
+        // считаем длину массива
+        $count = $query->count();
+        // получаем данные для пагинатора и выставляем параметры для ЧПУ (последние два)
+        $pagination  = new Pagination([
+            'totalCount' => $count,
+            'pageSize' => 3,
+            'forcePageParam' => false,
+            'pageSizeParam' => false,
+        ]);
+
+        // выгружаем продукты с учётом параметров пагинатора
+        $products = $query->offset($pagination->offset)->limit($pagination->limit)->all();
+
+
+        return $this->render('search', compact('products', 'pagination', 'search'));
     }
 }

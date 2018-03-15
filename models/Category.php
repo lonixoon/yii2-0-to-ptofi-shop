@@ -19,8 +19,8 @@ class Category extends ActiveRecord
         return 'category';
     }
 
-    // делаем в таблице связь полей
-    public function getProduct()
+    // делаем в таблице связь полей (один к многим)
+    public function getProducts()
     {
         return $this->hasMany(Product::className(), ['category_id' => 'id']);
     }

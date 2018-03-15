@@ -19,10 +19,10 @@ class Product extends ActiveRecord
         return 'product';
     }
 
-    // делаем в таблице связь полей
-    public function getProduct()
+    // делаем в таблице связь полей один к одному
+    public function getCategory()
     {
-        return $this->hasOne(Product::className(), ['id' => 'category_id']);
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
 }

@@ -53,6 +53,10 @@ $config = [
                 'category/<id:\d+>/page/<page:\d+>' => 'category/view',
                 // пишем правила для красивой ссылки в меню категорий
                 'category/<id:\d+>' => 'category/view',
+                // правило на карточку товара
+                'product/<id:\d+>' => 'product/view',
+                // правило на поиск
+                'search' => 'category/search',
             ],
         ],
     ],
