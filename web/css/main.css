@@ -8,9 +8,9 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  /*background:;*/
+  background:;
   position: relative;
-  font-weight:400;
+  font-weight:400px;
 }
 
 ul li {
@@ -910,7 +910,7 @@ h2.title {
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
-  /*opacity:;*/
+  opacity:;
 }
 
 .single-products:hover .product-overlay {
@@ -1176,16 +1176,18 @@ h2.title {
   margin-top: 10px;
 }
 
-
+.del-item{
+    cursor: pointer;
+}
 
 .view-product {
   position: relative;
 }
 
 .view-product img {
-  /*border: 1px solid #F7F7F0;*/
-  /*height: 380px;*/
-  /*width: 100%;*/
+  border: 1px solid #F7F7F0;
+  /*height: 380px;
+  width: 100%;*/
 }
 
 .view-product h3 {

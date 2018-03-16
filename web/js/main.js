@@ -2,28 +2,91 @@
 
 $('#sl2').slider();
 
-// добавляем акардион к нашему меню
 $('.catalog').dcAccordion({
     speed: 300
 });
 
-// добавление товара в корзину
-$('.add-to-cart').on('click', function (e) {
-    // e.preventDefault();
+// показывае модальное окно и передаём в него html из фукции добавляения товара в корзину
+function showCart(cart) {
+    $('#cart .modal-body').html(cart);
+    $('#cart').modal();
+}
+
+// показывает содержимое корзины
+function getCart(){
+    $.ajax({
+        url: '/cart/show',
+        type: 'GET',
+        success: function(res){
+            if(!res) alert('Ошибка!');
+            showCart(res);
+        },
+        error: function(){
+            alert('Error!');
+        }
+    });
+    return false;
+}
+
+// очищает корзину, запуская метод clear
+function clearCart() {
+    $.ajax({
+        url: '/cart/clear',
+        type: 'GET',
+        success: function (res) {
+            // если ответа нет, выводим ошибку
+            if (!res) alert('Ошибка!');
+            // если ответ есть, вставляем его в функцию вывода модального окна
+            showCart(res);
+        },
+        error: function () {
+            alert('Error!');
+        }
+    });
+}
+
+// Удаляем товар из корзины
+// Делигируем события т.к. элемента .modal-body пока мы его не вызовем ещё нет.
+$('#cart .modal-body').on('click', '.del-item', function(){
+
     var id = $(this).data('id');
     $.ajax({
-        url: '/cart/add',
-        data: { id : id },
-        method: 'GET',
-    })
-        .done(function (res) {
-            if (!res) alert('Пусто')
-            console.log(res);
-        })
-        .fail(function () {
-            alert("error");
-        });
+        url: '/cart/del-item',
+        // получаем id товара из data-id
+        data: {id: id},
+        type: 'GET',
+        success: function(res){
+            if(!res) alert('Ошибка!');
+            showCart(res);
+        },
+        error: function(){
+            alert('Error!');
+        }
+    });
+});
 
+// добавляем товар в карзину
+$('.add-to-cart').on('click', function (e) {
+    e.preventDefault();
+    // получаем id товара из data-id
+    var id = $(this).data('id');
+
+    $.ajax({
+        //отправляем запрос на контроллер
+        url: '/cart/add',
+        // передаём id товара
+        data: {id: id},
+        type: 'GET',
+        success: function (res) {
+            // если ответа нет, выводим ошибку
+            if (!res) alert('Ошибка!');
+            // если ответ есть, вставляем его в функцию вывода модального окна
+            showCart(res);
+        },
+        error: function () {
+            alert('Error!');
+        }
+    });
 });
 
 var RGBChange = function () {
