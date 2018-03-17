@@ -70,12 +70,14 @@ $('.add-to-cart').on('click', function (e) {
     e.preventDefault();
     // получаем id товара из data-id
     var id = $(this).data('id');
+    // получаем количество
+    qty = $('#qty').val();
 
     $.ajax({
         //отправляем запрос на контроллер
         url: '/cart/add',
         // передаём id товара
-        data: {id: id},
+        data: {id: id, qty: qty},
         type: 'GET',
         success: function (res) {
             // если ответа нет, выводим ошибку

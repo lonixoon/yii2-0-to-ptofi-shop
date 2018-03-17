@@ -12,7 +12,7 @@ use yii\db\ActiveRecord;
 
 class Cart extends ActiveRecord
 {
-    public function addToCart($product, $qty = 1)
+    public function addToCart($product, $qty)
     {
         // если тавар есть в корзине и нажать добавить товар, то количество будет +1
         if (isset($_SESSION['cart'][$product->id])) {

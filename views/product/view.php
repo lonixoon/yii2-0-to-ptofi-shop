@@ -103,11 +103,13 @@ use yii\helpers\Url;
                             <span>
                                 <span>US $<?= $product->price ?></span>
                                 <label>Quantity:</label>
-                                <input type="text" value="1">
-                                <button type="button" class="btn btn-fefault cart">
+                                <!--Добавляем id-->
+                                <input type="text" value="1" id="qty">
+                                <!--ссылка не нужна потому что мы отправляем запрос аясом в контроллер-->
+									              <a href="#" data-id="<?= $product->id ?>" class="btn btn-fefault add-to-cart cart">
                                     <i class="fa fa-shopping-cart"></i>
-                                    Add to cart
-                                </button>
+                                        Add to cart
+                                </a>
                             </span>
                             <p>
                                 <b>Brand:</b> <a
@@ -357,9 +359,9 @@ use yii\helpers\Url;
                                                 <p>
                                                     <a href="<?= Url::to(['product/view', 'id' => $hit->id]) ?>"><?= $hit->name ?></a>
                                                 </p>
-                                                <button type="button" class="btn btn-default add-to-cart">
-                                                    <i class="fa fa-shopping-cart"></i>Add to cart
-                                                </button>
+                                                <a href="#" data-id="<?= $hit->id ?>"
+                                                   class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
                                             </div>
                                         </div>
                                     </div>
