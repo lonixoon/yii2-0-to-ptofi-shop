@@ -122,11 +122,70 @@ class CartController extends AppController
         $this->setMeta('Корзина');
         // создаём модель заказа т.к. нужна форма
         $order = new Order();
+
         // если пришёл пост запрос
         if ($order->load(Yii::$app->request->post())) {
-            dump($order->load(Yii::$app->request->post()));
+            // помещаем их сессии в таблизу заказа количество и ...
+            $order->qty = $session['cart.qty'];
+            // ... общую сумму
+            $order->sum = $session['cart.sum'];
+
+            // Если заказ сохранён
+            if ($order->save()) {
+                // если всё хорошо, вызываем функцию сохранение заказа в БД
+                $this->saveOrderItems($session['cart'], $order->id);
+                // выводим сообщение что заказ принят
+                Yii::$app->session->setFlash('success', 'Ваш заказ принят. Менеджер вскоре свяжется с Вами.');
+                // отправляем письмо
+                // указваем вид () находится в папке mailer
+                Yii::$app->mailer->compose('order', compact('session'))
+                    // с какого емайла будет отправлена почта (первый параметр адрес почты второй
+                    // параметр обёртка, что увидит получаетль)
+                    ->setFrom(['postmaster@sandbox5dad7209af824bef809f41db566c8746.mailgun.org' => 'yii2-0-to-ptofi-shop:800'])
+                    // куда отправляем (поле из формы)
+                    ->setTo($order->email)
+                    // утсанавливаем тему письма
+                    ->setSubject('Заказ')
+                    // отправляем письмо
+                    ->send();
+                // очищаем данные из сессии по крзине
+                $session->remove('cart');
+                $session->remove('cart.qty');
+                $session->remove('cart.sum');
+                // перезагружаем страницу
+                return $this->refresh();
+            } else {
+                // иначе выдавать ошибку
+                Yii::$app->session->setFlash('error', 'Ошибка оформления заказа');
+            }
         }
 
         return $this->render('view', compact('session', 'order'));
+    }
+
+    /*
+     * Сохранение заказа в БД
+     */
+    protected function saveOrderItems($items, $order_id)
+    {
+        // проходимся циклом по товарам из корзины и получаем id товара и всю инфу по заказу
+        foreach ($items as $id => $item) {
+            // создаём модель в цикле т.к. один обънет на одну строку записи
+            $order_items = new OrderItems();
+            // id заказа
+            $order_items->order_id = $order_id;
+            //id товара
+            $order_items->product_id = $id;
+            // имя товара
+            $order_items->name = $item['name'];
+            // цену
+            $order_items->price = $item['price'];
+            // количества этого товара
+            $order_items->qty_item = $item['qty'];
+            // общую цену этого товара
+            $order_items->sum_item = $item['qty'] * $item['price'];
+            // сохраняем
+            $order_items->save();
+        }
     }
 }
