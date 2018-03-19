@@ -4,41 +4,37 @@
 
 /* @var $content string */
 
-use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\AppAssetIE;
-use yii\helpers\Url;
-use yii\bootstrap\Modal;
 
-// подключаем наши css и js
 AppAsset::register($this);
-// подключаем css и js которые должны быть только при определённых условиях
 AppAssetIE::register($this);
 ?>
-
-    <!--помечаем начало нашей страницы-->
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
     <html lang="<?= Yii::$app->language ?>">
     <head>
         <meta charset="<?= Yii::$app->charset ?>">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
-        <title><?= Html::encode($this->title) ?></title>
+        <title>Админка | <?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
 
-        <link rel="shortcut icon" href="/images/ico/favicon.ico">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144"
-              href="/images/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114"
-              href="/images/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
+        <?php
+        //        $this->registerJsFile('js/html5shiv.js', ['position' => \yii\web\View::POS_HEAD, 'condition' => 'lte IE9']);
+        //        $this->registerJsFile('js/respond.min.js', ['position' => \yii\web\View::POS_HEAD, 'condition' => 'lte IE9']);
+        ?>
+
+        <link rel="shortcut icon" href="images/ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
     </head><!--/head-->
 
     <body>
@@ -75,7 +71,7 @@ AppAssetIE::register($this);
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="<?= Url::home() ?>"><?= Html::img('@web/images/home/logo.png', ['alt' => 'e-shopper']) ?></a>
+                            <a href="<?= \yii\helpers\Url::home() ?>"><?= Html::img('@web/images/home/logo.png', ['alt' => 'E-SHOPPER']) ?></a>
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">
@@ -112,11 +108,9 @@ AppAssetIE::register($this);
                                 <?php else: ?>
                                     <li><a href="<?= Url::to(['/admin']) ?>"><i class="fa fa-lock"></i> Вход</a></li>
                                 <?php endif; ?>
-
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i>
-                                        Корзина</a>
+                                <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i> Cart</a>
                                 </li>
                             </ul>
                         </div>
@@ -163,8 +157,8 @@ AppAssetIE::register($this);
                     </div>
                     <div class="col-sm-3">
                         <div class="search_box pull-right">
-                            <form method="get" action="<?= Url::to(['category/search']) ?>">
-                                <input type="text" placeholder="Search" name="search">
+                            <form method="get" action="<?= \yii\helpers\Url::to(['category/search']) ?>">
+                                <input type="text" placeholder="Search" name="q">
                             </form>
                         </div>
                     </div>
@@ -173,7 +167,9 @@ AppAssetIE::register($this);
         </div><!--/header-bottom-->
     </header><!--/header-->
 
-    <?= $content; ?>
+    <div class="container">
+        <?= $content ?>
+    </div>
 
     <footer id="footer"><!--Footer-->
         <div class="footer-top">
@@ -190,7 +186,7 @@ AppAssetIE::register($this);
                             <div class="video-gallery text-center">
                                 <a href="#">
                                     <div class="iframe-img">
-                                        <img src="/images/home/iframe1.png" alt="">
+                                        <img src="/images/home/iframe1.png" alt=""/>
                                     </div>
                                     <div class="overlay-icon">
                                         <i class="fa fa-play-circle-o"></i>
@@ -205,7 +201,7 @@ AppAssetIE::register($this);
                             <div class="video-gallery text-center">
                                 <a href="#">
                                     <div class="iframe-img">
-                                        <img src="/images/home/iframe2.png" alt="">
+                                        <img src="/images/home/iframe2.png" alt=""/>
                                     </div>
                                     <div class="overlay-icon">
                                         <i class="fa fa-play-circle-o"></i>
@@ -220,7 +216,7 @@ AppAssetIE::register($this);
                             <div class="video-gallery text-center">
                                 <a href="#">
                                     <div class="iframe-img">
-                                        <img src="/images/home/iframe3.png" alt="">
+                                        <img src="/images/home/iframe3.png" alt=""/>
                                     </div>
                                     <div class="overlay-icon">
                                         <i class="fa fa-play-circle-o"></i>
@@ -235,7 +231,7 @@ AppAssetIE::register($this);
                             <div class="video-gallery text-center">
                                 <a href="#">
                                     <div class="iframe-img">
-                                        <img src="/images/home/iframe4.png" alt="">
+                                        <img src="/images/home/iframe4.png" alt=""/>
                                     </div>
                                     <div class="overlay-icon">
                                         <i class="fa fa-play-circle-o"></i>
@@ -248,7 +244,7 @@ AppAssetIE::register($this);
                     </div>
                     <div class="col-sm-3">
                         <div class="address">
-                            <img src="/images/home/map.png" alt="">
+                            <img src="/images/home/map.png" alt=""/>
                             <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
                         </div>
                     </div>
@@ -311,10 +307,10 @@ AppAssetIE::register($this);
                         <div class="single-widget">
                             <h2>About Shopper</h2>
                             <form action="#" class="searchform">
-                                <input type="text" placeholder="Your email address">
+                                <input type="text" placeholder="Your email address"/>
                                 <button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i>
                                 </button>
-                                <p>Get the most recent updates from <br>our site and be updated your self...</p>
+                                <p>Get the most recent updates from <br/>our site and be updated your self...</p>
                             </form>
                         </div>
                     </div>
@@ -326,7 +322,7 @@ AppAssetIE::register($this);
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
-                    <p class="pull-left">Copyright © 2018 E-SHOPPER Inc. All rights reserved.</p>
+                    <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
                     <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span>
                     </p>
                 </div>
@@ -334,21 +330,6 @@ AppAssetIE::register($this);
         </div>
 
     </footer><!--/Footer-->
-
-    <!--   НАЧАЛО: вызываем виджет с модальныйм окном-->
-    <?php
-    Modal::begin([
-        'header' => '<h2>Корзина</h2>',
-        'id' => 'cart',
-        'size' => 'modal-lg',
-        'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
-        <a href="' . Url::to(['cart/view']) . '" class="btn btn-success">Оформить заказ</a>
-        <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>'
-    ]);
-
-    Modal::end();
-    ?>
-    <!--   КОНЕЦ: вызываем виджет с модальныйм окном-->
 
     <?php $this->endBody() ?>
     </body>

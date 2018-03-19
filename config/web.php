@@ -11,6 +11,17 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    // подключаем модули (независимые страницы, например админка)
+    'modules' => [
+        // название папки
+        'admin' => [
+            // пространство имён
+            'class' => 'app\modules\admin\Module',
+            // основной шаблон
+            'layout' => 'admin',
+            'defaultRoute' => 'order/index'
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -20,9 +31,14 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        // объявляем модель которая отвечает за аунтификацию и авторизацию
         'user' => [
+            // путь к модели
             'identityClass' => 'app\models\User',
+            // автоматическая авторизация из кук (если стояла галочка запомнить!)
             'enableAutoLogin' => true,
+            // указваем куда будет перенаправлен пользователь если он не авторизован
+//            'loginUrl' => 'site/login',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

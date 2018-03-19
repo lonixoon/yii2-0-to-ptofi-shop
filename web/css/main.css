@@ -8,9 +8,9 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background:;
+  /*background:;*/
   position: relative;
-  font-weight:400px;
+  font-weight: 400;
 }
 
 ul li {
@@ -904,13 +904,13 @@ h2.title {
 .product-overlay {
   background:#FE980F;
   top: 0;
-  display: none;
+  /*display: none;*/
   height: 0;
   position: absolute;
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
-  opacity:;
+  /*opacity:;*/
 }
 
 .single-products:hover .product-overlay {
@@ -2404,12 +2404,12 @@ h2.title {
   border: 1px solid#F7F7F0
 }
 
-.btn.btn-primary {
-  background:#FE980F;
-  border: 0 none;
-  border-radius: 0;
-  margin-top: 16px;
-}
+/*.btn.btn-primary {*/
+  /*background:#FE980F;*/
+  /*border: 0 none;*/
+  /*border-radius: 0;*/
+  /*margin-top: 16px;*/
+/*}*/
 
 .blank-arrow {
   position: relative;

@@ -35,6 +35,18 @@ class LoginForm extends Model
         ];
     }
 
+    /*
+     * подписываем поля формы на русском
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Логин',
+            'password' => 'Пароль',
+            'rememberMe' => 'Запонить',
+        ];
+    }
+
     /**
      * Validates the password.
      * This method serves as the inline validation for password.
@@ -48,7 +60,7 @@ class LoginForm extends Model
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, 'Логин или пароль введены не верно');
             }
         }
     }
@@ -59,7 +71,18 @@ class LoginForm extends Model
      */
     public function login()
     {
+        // проверяем
         if ($this->validate()) {
+            // если отмечена галочка Запонить
+            if ($this->rememberMe) {
+                // получаем пользователя
+                $user = $this->getUser();
+                // герерируем случайную строку
+                $user->generateAuthKey();
+                // зписываем её в БД
+                $user->save();
+            }
+            // если все ок, авторизуем пользователя, если стояла галочка запомнить записываем куки
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         }
         return false;
@@ -72,10 +95,12 @@ class LoginForm extends Model
      */
     public function getUser()
     {
+        // проверяет, найден ли пользователь?
         if ($this->_user === false) {
+            // если не найден, ищём его:
             $this->_user = User::findByUsername($this->username);
         }
-
+        // возвращаем либо пользователя либо false
         return $this->_user;
     }
 }
