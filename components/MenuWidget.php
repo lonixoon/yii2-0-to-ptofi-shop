@@ -23,6 +23,8 @@ class MenuWidget extends Widget
     // готовый html код
     public $menuHtml;
 
+    public $model;
+
     // инициализируем наше меню..
     public function init()
     {
@@ -38,9 +40,13 @@ class MenuWidget extends Widget
     // запускаем выгрузку в меню
     public function run()
     {
-        // получаем меню из кеша (если оно там есть)
-        $menu = Yii::$app->cache->get('menu');
-        if ($menu) return $menu;
+        // если задейсвован шаблон не для админки
+        if ($this->tpl == 'menu.php') {
+            // получаем меню из кеша (если оно там есть)
+            $menu = Yii::$app->cache->get('menu');
+            if ($menu) return $menu;
+        }
+
 
         // выгружаем все данные в виде масива и как индекс используем поле id
         $this->data = Category::find()->indexBy('id')->asArray()->all();
@@ -49,17 +55,21 @@ class MenuWidget extends Widget
         // возвращаем html дерева
         $this->menuHtml = $this->getMenuHtml($this->tree);
 
-        // записываем данные в кеш (ключ, данные, время в секундах)
-        Yii::$app->cache->set('menu', $this->menuHtml, 60);
+        // если задейсвован шаблон не для админки
+        if ($this->tpl == 'menu.php') {
+            // записываем данные в кеш (ключ, данные, время в секундах)
+            Yii::$app->cache->set('menu', $this->menuHtml, 60);
+        }
 
         // возвращаем шаблон меню
         return $this->menuHtml;
     }
 
     // получаем дерево (вложенные массивы по категориям)
-    protected function getTree(){
+    protected function getTree()
+    {
         $tree = [];
-        foreach ($this->data as $id=>&$node) {
+        foreach ($this->data as $id => &$node) {
             if (!$node['parent_id'])
                 $tree[$id] = &$node;
             else
@@ -69,19 +79,21 @@ class MenuWidget extends Widget
     }
 
     // принемает дерево именно параметром, т.к. использует не всегда все дерево
-    protected function getMenuHtml($tree){
+    protected function getMenuHtml($tree, $tab = '')
+    {
         $str = '';
         // проходим в цикле по всему дереву
         foreach ($tree as $category) {
             // и передаём его параметром каждый конкретный элемент дерева
-            $str .= $this->catToTemplate($category);
+            $str .= $this->catToTemplate($category, $tab);
         }
         return $str;
     }
 
     // метод catToTemplate принемает параметром каждый элемент и помещает его в шаблон
     // который подключается по указанному пути (на экран не выводится!)
-    protected function catToTemplate($category){
+    protected function catToTemplate($category, $tab)
+    {
         ob_start();
         include __DIR__ . '/menu_tpl/' . $this->tpl;
         return ob_get_clean();

@@ -120,8 +120,6 @@ use yii\helpers\Url;
                 </div>
             </div>
 
-            <?php dump(Yii::$app->user->identity) ?>
-
             <div class="col-sm-9 padding-right">
                 <!--Начало: популярные категории-->
                 <?php if (!empty($hits)): ?>
