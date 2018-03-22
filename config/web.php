@@ -58,11 +58,12 @@ $config = [
 //            // for the mailer to send real emails.
 //            'useFileTransport' => true,
 //        ],
+        // почтовый клинт для mailgun yii2
         'mailer' => [
             'class' => 'boundstate\mailgun\Mailer',
             'key' => '',
             'domain' => 'sandbox5dad7209af824bef809f41db566c8746.mailgun.org',
-            'useFileTransport' => false,
+            'useFileTransport' => true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -96,7 +97,23 @@ $config = [
     // выставляем русский язык для уведомлений
     'language' => 'ru-RU',
     // устанавливаем контроллер по умолчанию
-    'defaultRoute' => 'category/index'
+    'defaultRoute' => 'category/index',
+
+    // файловый менеджер
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\PathController',
+            'access' => ['@'],
+            'root' => [
+                'baseUrl'=>'/web',
+//                'basePath'=>'@webroot',
+                // куда загружается файл
+                'path' => 'upload/global',
+                //название папки  редакторе (может назваться как угодно)
+                'name' => 'Global'
+            ],
+        ]
+    ],
 ];
 
 if (YII_ENV_DEV) {
