@@ -64,7 +64,13 @@ dump($model);
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image')->fileInput(['maxlength' => true]) ?>
+
+    <?= // загрузка главной картинки
+    $form->field($model, 'image')->fileInput() ?>
+
+    <?= // загрузка не основных картинок (галлерея)
+    $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+
 
     <?= $form->field($model, 'hit')->checkbox(['0', '1',]) ?>
 

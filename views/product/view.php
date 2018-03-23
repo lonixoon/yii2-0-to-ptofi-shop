@@ -50,11 +50,20 @@ use yii\helpers\Url;
 
                 </div>
             </div>
+
+            <?php // получаем все картинки продуктов
+            // получаем главную картинку
+            $mainImg = $product->getImage();
+            // получаем остальные картинки
+            $gallery = $product->getImages();
+            ?>
+
             <div class="col-sm-9 padding-right">
                 <div class="product-details"><!--product-details-->
                     <div class="col-sm-5">
                         <div class="view-product">
-                            <?= Html::img("@web/images/product/{$product->img}", ['alt' => $product->name]) ?>
+                            <? //= Html::img("@web/images/product/{$product->img}", ['alt' => $product->name]) ?>
+                            <?= Html::img($mainImg->getUrl(), ['alt' => $product->name]) ?>
 
                             <h3>ZOOM</h3>
                         </div>
@@ -63,22 +72,25 @@ use yii\helpers\Url;
 
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
-                                <div class="item active">
-                                    <a href=""><img src="/images/product-details/similar1.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar2.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar3.jpg" alt=""></a>
-                                </div>
-                                <div class="item">
-                                    <a href=""><img src="/images/product-details/similar1.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar2.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar3.jpg" alt=""></a>
-                                </div>
-                                <div class="item">
-                                    <a href=""><img src="/images/product-details/similar1.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar2.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar3.jpg" alt=""></a>
-                                </div>
-
+                                <?php $count = count($gallery);
+                                // назначаем счётчик что бы определить каждый третий элемент
+                                $i = 0;
+                                // перебераем gallery на картинки
+                                foreach ($gallery as $img): ?>
+                                    <?php // если остаток от деления 0 добавляем к классу active
+                                    if ($i % 3 == 0): ?>
+                                        <div class="item <?php if ($i == 0) echo ' active' ?>">
+                                    <?php endif; ?>
+                                    <!--Выводим в цикле нашу картинку-->
+                                    <a href="#"><?= Html::img($img->getUrl('84x85'), ['alt' => '']) ?></a>
+                                    <?php
+                                    // увиличиваем счётчик
+                                    $i++;
+                                    // если остаток от деления 0 добавляем закрываем div
+                                    if ($i % 3 == 0 || $i == $count): ?>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
                             </div>
 
                             <!-- Controls -->

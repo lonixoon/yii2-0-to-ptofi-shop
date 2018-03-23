@@ -94,12 +94,17 @@ class ProductController extends Controller
 
             // создаём объект для image и загружаем в него отправленный файл из поля image
             $model->image = UploadedFile::getInstance($model, 'image');
-
-            // если если image
             if ($model->image) {
                 // вызываем метод upload (загрузку)
                 $model->upload();
             }
+            // удаляем (зачем пока не понял но без этого выдаёт ошибку)
+            unset($model->image);
+
+            // создаём модель gallery и загружаем в него отправленные файлы из поля gallery
+            $model->gallery = UploadedFile::getInstances($model, 'gallery');
+            // вызываем метод uploadGallery (загрузку нескольких картинок)
+            $model->uploadGallery();
 
 
             // создаём свпывающее сообщение об успехе (вывод прописан в шаблоне)

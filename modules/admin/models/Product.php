@@ -70,7 +70,7 @@ class Product extends ActiveRecord
             // поле для загрузки основной картинки
             [['image'], 'file', 'extensions' => 'png, jpg'],
             // поле для загрузки дополнительных картнок
-//            [['gallery'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 3],
+            [['gallery'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 3],
         ];
     }
 
@@ -88,6 +88,7 @@ class Product extends ActiveRecord
             'keywords' => 'Ключевые слова',
             'description' => 'Мета описание',
             'image' => 'Фото',
+            'gallery' => 'Галерея',
             'hit' => 'Хит',
             'new' => 'Новинка',
             'sale' => 'Распродажа',
@@ -95,7 +96,7 @@ class Product extends ActiveRecord
     }
 
     /*
-     *  загрузка картинки на сервер
+     *  загрузка главной картинки на сервер
      */
     public function upload()
     {
@@ -105,7 +106,35 @@ class Product extends ActiveRecord
             $patch = 'upload/store/' . $this->image->baseName . '.' . $this->image->extension;
             // загружаем файл по указанному выше пути
             $this->image->saveAs($patch);
+            // записываем путь в БД - image к картнке
+            $this->attachImage($patch, true);
+            // удаляем оригинал файла (@ - запретить вывод ошибок)
+            @unlink($patch);
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
+     *  загрузка дополнительных картинок (галереи)
+     */
+    public function uploadGallery()
+    {
+        // если вся волидация пройдена
+        if ($this->validate()) {
+            foreach($this->gallery as $file){
+                // указываем пуьть по котроому загружаем файл, его мия и разширение
+                $patch = 'upload/store/' . $file->baseName . '.' . $file->extension;
+                // загружаем файл по указанному выше пути
+                $file->saveAs($patch);
+                // записываем путь в БД - image к картнке
+                $this->attachImage($patch);
+                // удаляем оригинал файла (@ - запретить вывод ошибок)
+                @unlink($patch);
+            }
+            return true;
+
         } else {
             return false;
         }

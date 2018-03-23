@@ -45,7 +45,7 @@ use yii\widgets\ActiveForm;
                 <!--НАЧАЛО: Берём все что есть в массиве корзина внутри сессии-->
                 <?php foreach ($session['cart'] as $id => $item): ?>
                     <tr>
-                        <td><?= Html::img("@web/images/product/{$item['img']}", ['alt' => $item['name'], 'height' => 50]) ?></td>
+                        <td><?= Html::img($item['img'], ['alt' => $item['name']]) ?></td>
                         <td><a href="<?= Url::to(['product/view', 'id' => $id]) ?>"><?= $item['name'] ?></a></td>
                         <td><?= $item['qty'] ?></td>
                         <td><?= $item['price'] ?></td>
