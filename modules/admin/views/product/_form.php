@@ -13,11 +13,14 @@ mihaildev\elfinder\Assets::noConflict($this);
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Product */
 /* @var $form yii\widgets\ActiveForm */
+dump($model);
 ?>
 
 <div class="product-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+
+    <?php // добавляем в форму возможность загрузки файлов (options - 'enctype' => 'multipart/form-data')
+    $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <? //= $form->field($model, 'category_id')->textInput() ?>
 
@@ -45,6 +48,7 @@ mihaildev\elfinder\Assets::noConflict($this);
         'editorOptions' => ElFinder::ckeditorOptions(
             [
                 'elfinder',
+                // допонительный путь по умолчанию
 //                'path' => 'some/sub/path'
             ],
             [
@@ -60,7 +64,7 @@ mihaildev\elfinder\Assets::noConflict($this);
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'image')->fileInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'hit')->checkbox(['0', '1',]) ?>
 

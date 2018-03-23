@@ -22,6 +22,23 @@ use yii\db\ActiveRecord;
  */
 class Product extends ActiveRecord
 {
+    // т.к. с таблицы Product не будет братся поле Img создаём переменную под новое поле в таблице
+    // для модуля загрузки картинок
+    public $image;
+    public $gallery;
+
+    /*
+     * метод поведения для модуля картинок
+     */
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -50,6 +67,10 @@ class Product extends ActiveRecord
             [['content', 'hit', 'new', 'sale'], 'string'],
             [['price'], 'number'],
             [['name', 'keywords', 'description', 'img'], 'string', 'max' => 255],
+            // поле для загрузки основной картинки
+            [['image'], 'file', 'extensions' => 'png, jpg'],
+            // поле для загрузки дополнительных картнок
+//            [['gallery'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 3],
         ];
     }
 
@@ -66,10 +87,27 @@ class Product extends ActiveRecord
             'price' => 'Цена',
             'keywords' => 'Ключевые слова',
             'description' => 'Мета описание',
-            'img' => 'Фото',
+            'image' => 'Фото',
             'hit' => 'Хит',
             'new' => 'Новинка',
             'sale' => 'Распродажа',
         ];
+    }
+
+    /*
+     *  загрузка картинки на сервер
+     */
+    public function upload()
+    {
+        // если вся волидация пройдена
+        if ($this->validate()) {
+            // указываем пуьть по котроому загружаем файл, его мия и разширение
+            $patch = 'upload/store/' . $this->image->baseName . '.' . $this->image->extension;
+            // загружаем файл по указанному выше пути
+            $this->image->saveAs($patch);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
