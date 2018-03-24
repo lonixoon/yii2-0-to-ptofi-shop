@@ -25,7 +25,7 @@ use yii\helpers\Html;
                 <!--потребуется id товара и информация-->
                 <tr>
                     <!--по скольку работаем с сессиями выводим массив а не объект-->
-                    <td><?= Html::img("@web/images/product/{$item['img']}", ['alt' => $item['name'], 'height' => '50px']) ?></td>
+                    <td><?= Html::img($item['img'], ['alt' => $item['name']]) ?></td>
                     <td><?= $item['name'] ?></td>
                     <td><?= $item['qty'] ?></td>
                     <td><?= $item['price'] ?></td>

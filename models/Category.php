@@ -25,4 +25,16 @@ class Category extends ActiveRecord
         return $this->hasMany(Product::className(), ['category_id' => 'id']);
     }
 
+    /*
+     * метод поведения для модуля картинок
+     */
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
+
 }

@@ -1,5 +1,6 @@
 <?php
 
+use app\components\MenuWidget;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -23,10 +24,10 @@ use yii\widgets\ActiveForm;
 
 <!--наш кастомный список select для категорий-->
     <div class="form-group field-category-parent_id has-success">
-        <label class="control-label" for="category-parent_id">Родительская категория</label>
+        <label class="control-label" for="category-parent_id">Главная</label>
         <select id="category-parent_id" class="form-control" name="Category[parent_id]" aria-invalid="false">
             <option value="0">Главная</option>
-            <?= \app\components\MenuWidget::widget(['tpl' => 'select', 'model' => $model]) ?>
+            <?= MenuWidget::widget(['tpl' => 'select', 'model' => $model]) ?>
         </select>
     </div>
 

@@ -65,6 +65,7 @@ use yii\helpers\Url;
                     <?php if (!empty($products)): ?>
                         <?php $i = 0;
                         foreach ($products as $product): ?>
+                            <?php $mainImg = $product->getImage(); ?>
                             <?php $i++ ?>
                             <?php if ($i % 3 == 0): ?>
                                 <div class="row">
@@ -73,14 +74,14 @@ use yii\helpers\Url;
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <?= Html::img("@web/images/product/{$product->img}", ['alt' => $product->name]) ?>
+                                            <?= Html::img($mainImg->getUrl('268x249'), ['alt' => $product->name]) ?>
                                             <h2>$<?= $product->price ?></h2>
                                             <p>
                                                 <a href="<?= Url::to(['product/view', 'id' => $product->id]) ?>"><?= $product->name ?></a>
                                             </p>
                                             <a href="#" data-id="<?= $product->id ?>"
                                                class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                        class="fa fa-shopping-cart"></i>Добавить</a>
                                         </div>
                                         <!--выводим новинка и хит продаж по условию-->
                                         <?php if ($product->new): ?>

@@ -19,7 +19,10 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "symfony/var-dumper": "^4.0",
-        "boundstate/yii2-mailgun": "^0.0.3"
+        "boundstate/yii2-mailgun": "^0.0.3",
+        "mihaildev/yii2-ckeditor": "*",
+        "mihaildev/yii2-elfinder": "^1.2",
+        "costa-rico/yii2-images": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
