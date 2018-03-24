@@ -30,11 +30,11 @@ AppAssetIE::register($this);
         //        $this->registerJsFile('js/respond.min.js', ['position' => \yii\web\View::POS_HEAD, 'condition' => 'lte IE9']);
         ?>
 
-        <link rel="shortcut icon" href="images/ico/favicon.ico">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+        <!--        <link rel="shortcut icon" href="images/ico/favicon.ico">-->
+        <!--        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">-->
+        <!--        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">-->
+        <!--        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">-->
+        <!--        <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">-->
     </head><!--/head-->
 
     <body>
@@ -46,8 +46,8 @@ AppAssetIE::register($this);
                     <div class="col-sm-6">
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
-                                <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-                                <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i> +7 923 458 21 74</a></li>
+                                <li><a href="#"><i class="fa fa-envelope"></i> soinov.alexey@yandex.ru</a></li>
                             </ul>
                         </div>
                     </div>
@@ -69,51 +69,39 @@ AppAssetIE::register($this);
         <div class="header-middle"><!--header-middle-->
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="logo pull-left">
-                            <a href="<?= \yii\helpers\Url::home() ?>"><?= Html::img('@web/images/home/logo.png', ['alt' => 'E-SHOPPER']) ?></a>
-                        </div>
-                        <div class="btn-group pull-right">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle usa"
-                                        data-toggle="dropdown">
-                                    USA
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Canada</a></li>
-                                    <li><a href="#">UK</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle usa"
-                                        data-toggle="dropdown">
-                                    DOLLAR
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Canadian Dollar</a></li>
-                                    <li><a href="#">Pound</a></li>
-                                </ul>
-                            </div>
+                            <a href="<?= Url::home() ?>"><?= Html::img('@web/images/home/logo.png', ['alt' => 'e-shopper']) ?></a>
                         </div>
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-9">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
                                 <?php if (!Yii::$app->user->isGuest): ?>
                                     <li><a href="<?= Url::to(['/site/logout']) ?>"><i class=" fa fa-user"></i> Выйти из
                                             профиля <?= Yii::$app->user->identity['username'] ?></a></li>
+<!--                                    <li><a href="--><?//= Url::to(['/admin']) ?><!--"><i class="fa fa-lock"></i> Вход админку</a>-->
+<!--                                    </li>-->
                                 <?php else: ?>
-                                    <li><a href="<?= Url::to(['/admin']) ?>"><i class="fa fa-lock"></i> Вход</a></li>
+                                    <li><a href="<?= Url::to(['/admin']) ?>"><i class="fa fa-lock"></i> Вход админку</a>
+                                    </li>
                                 <?php endif; ?>
-                                <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i> Cart</a>
+
+
+                                <!--                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>-->
+                                <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i>
+                                        Корзина</a>
                                 </li>
                             </ul>
                         </div>
+                        <!--Начало: форма поиска-->
+                        <div class="search_box pull-right">
+                            <form method="get" action="<?= Url::to(['category/search']) ?>">
+                                <input type="text" placeholder="Search" name="search">
+                            </form>
+                        </div>
+                        <!--Конец: форма поиска-->
+
                     </div>
                 </div>
             </div>
@@ -134,7 +122,7 @@ AppAssetIE::register($this);
                         </div>
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li><a href="<?= Url::to(['/admin']) ?>" class="active">Home Admin</a></li>
+                                <li><a href="<?= Url::to(['/admin']) ?>" class="active">Главная Admin</a></li>
                                 <li class="dropdown"><a href="#">Категории<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="<?= Url::to(['category/index']) ?>">Список категорий</a></li>
@@ -148,13 +136,6 @@ AppAssetIE::register($this);
                                     </ul>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="search_box pull-right">
-                            <form method="get" action="<?= \yii\helpers\Url::to(['category/search']) ?>">
-                                <input type="text" placeholder="Search" name="q">
-                            </form>
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,6 @@ mihaildev\elfinder\Assets::noConflict($this);
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Product */
 /* @var $form yii\widgets\ActiveForm */
-dump($model);
 ?>
 
 <div class="product-form">
@@ -35,7 +34,7 @@ dump($model);
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <? //= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
     <?php //echo $form->field($model, 'content')->widget(CKEditor::className(), [
     //            'editorOptions' => [
     //                'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
@@ -43,20 +42,20 @@ dump($model);
     //            ],
     //        ]); ?>
 
-    <?php // прикручивае визульный редактор и файловый менеджер
-    echo $form->field($model, 'content')->widget(CKEditor::className(), [
-        'editorOptions' => ElFinder::ckeditorOptions(
-            [
-                'elfinder',
-                // допонительный путь по умолчанию
-//                'path' => 'some/sub/path'
-            ],
-            [
-                'preset' => 'standard', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
-                'inline' => false, //по умолчанию false
-            ]
-        ),
-    ]); ?>
+<?php //// прикручивае визульный редактор и файловый менеджер
+//    echo $form->field($model, 'content')->widget(CKEditor::className(), [
+//        'editorOptions' => ElFinder::ckeditorOptions(
+//            [
+//                'elfinder',
+//                // допонительный путь по умолчанию
+////                'path' => 'some/sub/path'
+//            ],
+//            [
+//                'preset' => 'standard', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+//                'inline' => false, //по умолчанию false
+//            ]
+//        ),
+//    ]); ?>
 
     <?= $form->field($model, 'price')->textInput() ?>
 
@@ -79,7 +78,7 @@ dump($model);
     <?= $form->field($model, 'sale')->checkbox(['0', '1',]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

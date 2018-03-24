@@ -23,41 +23,40 @@ use yii\helpers\Url;
                         <div class="item active">
                             <div class="col-sm-6">
                                 <h1><span>E</span>-SHOPPER</h1>
-                                <h2>Free E-Commerce Template</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. </p>
+                                <h3>Лучшие товары, с самыми большими скидками.</h3>
+<!--                                <p>Лучшие распродажи, с самым глубоким дисконтом.</p>-->
                                 <button type="button" class="btn btn-default get">Get it now</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="/images/home/girl1.jpg" class="girl img-responsive" alt=""/>
-                                <img src="/images/home/pricing.png" class="pricing" alt=""/>
+                                <img src="/images/home/girl1.jpg" class="girl img-responsive" alt="">
+                                <img src="/images/home/pricing.png" class="pricing" alt="">
                             </div>
                         </div>
                         <div class="item">
                             <div class="col-sm-6">
                                 <h1><span>E</span>-SHOPPER</h1>
-                                <h2>100% Responsive Design</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. </p>
+                                <h3>100% гарантия качества и только настоящие бренды</h3>
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor-->
+<!--                                    incididunt ut labore et dolore magna aliqua. </p>-->
                                 <button type="button" class="btn btn-default get">Get it now</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="/images/home/girl2.jpg" class="girl img-responsive" alt=""/>
-                                <img src="/images/home/pricing.png" class="pricing" alt=""/>
+                                <img src="/images/home/girl2.jpg" class="girl img-responsive" alt="">
+                                <img src="/images/home/pricing.png" class="pricing" alt="">
                             </div>
                         </div>
 
                         <div class="item">
                             <div class="col-sm-6">
                                 <h1><span>E</span>-SHOPPER</h1>
-                                <h2>Free Ecommerce Template</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. </p>
+                                <h3>Все последние тенденции моды в одном месте</h3>
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor-->
+<!--                                    incididunt ut labore et dolore magna aliqua. </p>-->
                                 <button type="button" class="btn btn-default get">Get it now</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="/images/home/girl3.jpg" class="girl img-responsive" alt=""/>
-                                <img src="/images/home/pricing.png" class="pricing" alt=""/>
+                                <img src="/images/home/girl3.jpg" class="girl img-responsive" alt="">
+                                <img src="/images/home/pricing.png" class="pricing" alt="">
                             </div>
                         </div>
 
@@ -81,7 +80,7 @@ use yii\helpers\Url;
         <div class="row">
             <div class="col-sm-3">
                 <div class="left-sidebar">
-                    <h2>Category</h2>
+                    <h2>Категории</h2>
 
                     <!--начало виждет меню категорий-->
                     <ul class="catalog category-products">
@@ -92,16 +91,16 @@ use yii\helpers\Url;
 
 
                     <div class="price-range"><!--price-range-->
-                        <h2>Price Range</h2>
+                        <h2>Фильтр по цене</h2>
                         <div class="well text-center">
                             <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600"
-                                   data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br/>
+                                   data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br>
                             <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
                         </div>
                     </div><!--/price-range-->
 
                     <div class="shipping text-center"><!--shipping-->
-                        <img src="/images/home/shipping.jpg" alt=""/>
+                        <img src="/images/home/shipping.jpg" alt="">
                     </div><!--/shipping-->
 
                 </div>
@@ -128,8 +127,7 @@ use yii\helpers\Url;
                                                 <a href="<?= Url::to(['product/view', 'id' => $hit->id]) ?>"><?= $hit->name ?></a>
                                             </p>
                                             <a href="<?= Url::to(['cart/add', 'id' => $hit->id]) ?>" data-id="<?= $hit->id ?>" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                                        class="fa fa-shopping-cart"></i>Добавить</a>
                                         </div>
                                         <!--выводим новинка и хит продаж по условию-->
                                         <?php if ($hit->new): ?>
@@ -140,13 +138,6 @@ use yii\helpers\Url;
                                             <?= Html::img("@web/images/home/sale.png",
                                                 ['alt' => 'Распродажа', 'class' => 'new']) ?>
                                         <?php endif; ?>
-                                    </div>
-
-                                    <div class="choose">
-                                        <ul class="nav nav-pills nav-justified">
-                                            <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                                            <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +170,7 @@ use yii\helpers\Url;
                                                 </p>
                                                 <a href="#" data-id="<?= $hit->id ?>"
                                                    class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            class="fa fa-shopping-cart"></i>Добавить</a>
                                             </div>
                                         </div>
                                     </div>

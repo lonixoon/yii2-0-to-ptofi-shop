@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Подтвердите удаление',
                 'method' => 'post',
             ],
         ]) ?>
@@ -41,9 +41,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => '<img src="' . $image->getUrl() . '">',
                 'format' => 'html',
             ],
-            'hit',
-            'new',
-            'sale',
+            [
+                'attribute' => 'hit',
+                'value' => $model->hit ? 'Да' : 'Нет',
+                'format' => 'html',
+            ],
+            [
+                'attribute' => 'new',
+                'value' => $model->new ? 'Да' : 'Нет',
+                'format' => 'html',
+            ],
+            [
+                'attribute' => 'sale',
+                'value' => $model->sale ? 'Да' : 'Нет',
+                'format' => 'html',
+            ],
         ],
     ]) ?>
 
