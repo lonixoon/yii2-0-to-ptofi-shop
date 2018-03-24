@@ -13,4 +13,3 @@ if ($category['id'] == $this->model->parent_id) echo ' selected' ?>
         <?= $this->getMenuHtml($category['childs'], $tab . '|--> ') ?>
     </ul>
 <?php endif; ?>
-
