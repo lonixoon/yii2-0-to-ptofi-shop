@@ -25,7 +25,7 @@ mihaildev\elfinder\Assets::noConflict($this);
 
     <!--наш кастомный список select для категорий-->
     <div class="form-group field-product-category_id has-success">
-        <select id="product-category_id" class="form-control" name="Product[parent_id]" aria-invalid="false">
+        <select id="product-category_id" class="form-control" name="Product[category_id]" aria-invalid="false">
             <option value="0">Главная</option>
             <?= // певый параметр какой шаблон использовать, стром передаём данные
             MenuWidget::widget(['tpl' => 'select_product', 'model' => $model]) ?>
@@ -34,7 +34,7 @@ mihaildev\elfinder\Assets::noConflict($this);
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+<!--    --><?//= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
     <?php //echo $form->field($model, 'content')->widget(CKEditor::className(), [
     //            'editorOptions' => [
     //                'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
@@ -42,20 +42,20 @@ mihaildev\elfinder\Assets::noConflict($this);
     //            ],
     //        ]); ?>
 
-<?php //// прикручивае визульный редактор и файловый менеджер
-//    echo $form->field($model, 'content')->widget(CKEditor::className(), [
-//        'editorOptions' => ElFinder::ckeditorOptions(
-//            [
-//                'elfinder',
-//                // допонительный путь по умолчанию
-////                'path' => 'some/sub/path'
-//            ],
-//            [
-//                'preset' => 'standard', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
-//                'inline' => false, //по умолчанию false
-//            ]
-//        ),
-//    ]); ?>
+<?php // прикручивае визульный редактор и файловый менеджер
+    echo $form->field($model, 'content')->widget(CKEditor::className(), [
+        'editorOptions' => ElFinder::ckeditorOptions(
+            [
+                'elfinder',
+                // допонительный путь по умолчанию
+//                'path' => 'some/sub/path'
+            ],
+            [
+                'preset' => 'basic', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+                'inline' => false, //по умолчанию false
+            ]
+        ),
+    ]); ?>
 
     <?= $form->field($model, 'price')->textInput() ?>
 

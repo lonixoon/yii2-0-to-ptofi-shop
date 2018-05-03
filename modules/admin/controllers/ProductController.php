@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\modules\admin\models\Product;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -72,6 +73,8 @@ class ProductController extends Controller
             Yii::$app->session->setFlash('success', 'Товар ' . $model->name . ' добавлен');
 
             return $this->redirect(['view', 'id' => $model->id]);
+        } elseif ($model->load(Yii::$app->request->post()) && !$model->save()) {
+            return Json::encode($model->getErrors());
         }
 
         return $this->render('create', [
