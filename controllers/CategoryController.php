@@ -17,6 +17,7 @@ class CategoryController extends AppController
 {
     public function actionIndex()
     {
+        dump($_SESSION);
         // получаем из таблицы product все записи где стоблец имеет значение = 1
         $hits = Product::find()->where(['hit' => '1'])->limit(6)->all();
         // выводим на главной страницы название нашего магазина фиксированно
